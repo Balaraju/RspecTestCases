@@ -27,7 +27,7 @@ RSpec.describe UsersController, :type => :controller do
   describe "POST #create" do 
     context "with valid attributes" do
       it "Creates new contact" do
-        expect{ post :create, user: FactoryGirl.attributes_for(:user) }.to change(User,:count).by(1) 
+        expect{ post :create, user: {:first_name => "Bala", :last_name => "Raju"} }.to change(User,:count).by(1) 
       end
       it "redirects to the new contact" do 
         post :create, 
@@ -83,4 +83,18 @@ RSpec.describe UsersController, :type => :controller do
     expect(response).to redirect_to(users_path)
    end
   end
+  
+  describe "GET #edit" do
+    it "showing edit template" do 
+      user = FactoryGirl.create(:user)
+      get :edit, id: user
+      expect(response).to render_template :edit
+    end
+  end
+  
+  describe "PUT #update" do
+    it "update user details"
+    it "update user valid details"
+  end
+  
 end
