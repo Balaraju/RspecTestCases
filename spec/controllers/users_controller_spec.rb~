@@ -56,8 +56,31 @@ RSpec.describe UsersController, :type => :controller do
     it "Showing a particular user" do 
      
       user = FactoryGirl.create(:user)
-      get :show, id: user
-      assigns(:user) 
+      get :show, id: user.id
+      expect(assigns(:user)).to eq(user) 
     end
+   
+   it "showing template of show page" do
+    user = FactoryGirl.create(:user)
+    get :show, id: user
+    expect(response).to render_template :show
+   end
+  end
+  
+  describe "DELETE #destroy" do
+    before :each do
+      @user = FactoryGirl.create(:user)
+    end
+    
+   it "After deleting user count change to -1 " do
+    expect{
+      delete :destroy, id: @user
+    }.to change(User, :count).by(-1)
+   end
+   
+   it "After delete page redirect_to index" do 
+    delete :destroy, id: @user
+    expect(response).to redirect_to(users_path)
+   end
   end
 end

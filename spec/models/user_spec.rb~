@@ -40,6 +40,7 @@ RSpec.describe User, :type => :model do
     end
   end
    
+   
   
   # See more at: http://everydayrails.com/2012/03/19/testing-series-rspec-models-factory-girl.html#sthash.ZwBd9eQz.dpuf
 end
